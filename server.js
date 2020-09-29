@@ -7,8 +7,12 @@ const cors = require("cors");
 // import Vue from "vue";
 // const Vue = require("vue");
 
+//Before heroku
+const compression = require("compression");
+const helmet = require("helmet");
+
 const path = require("path");
-// const router = express.Router();
+const router = express.Router();
 
 const app = express();
 
@@ -39,6 +43,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //   // app.use(express.static("./admin/pages"));
 // }
 
+app.use(compression());
+app.use(helmet());
+app.use(express.static(path.join(__dirname, "./public")));
+
 // require api
 const productRoutes = require("./routes/product");
 const categoryRoutes = require("./routes/category");
@@ -60,10 +68,10 @@ app.use("/api", paymentRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", searchRoutes);
 
-// go to api home address
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/index.html"));
-});
+// // go to api home address
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname + "public/index.html"));
+// });
 
 //listening
 const PORT = process.env.PORT || 3000;
