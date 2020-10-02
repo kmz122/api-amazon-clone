@@ -42,4 +42,49 @@ router.get("/owners", async (req, res) => {
   }
 });
 
+// PUT request = update a single owner
+router.put("/owners/:id", async (req, res) => {
+  try {
+    let owner = await Owner.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          name: req.body.name,
+          about: req.body.about,
+          photo: req.file.path,
+        },
+      },
+      { upsert: true }
+    );
+
+    res.json({
+      success: true,
+      updatedOwner: owner,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+});
+
+// DELETE request = delete a single owner
+router.delete("/owners/:id", async (req, res) => {
+  try {
+    let deletedOwner = await Owner.findOneAndDelete({ _id: req.params.id });
+
+    if (deletedOwner)
+      res.json({
+        success: true,
+        message: "Deleting a owner sucessfully.",
+      });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+});
+
 module.exports = router;

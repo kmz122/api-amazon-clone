@@ -2,7 +2,7 @@ const rounter = require("express").Router();
 const router = require("express").Router();
 const Order = require("../models/order");
 const verifyToken = require("../middlewares/verify-token");
-const { find } = require("../models/order");
+// const { find } = require("../models/order");
 
 router.get("/orders", verifyToken, async (req, res) => {
   try {

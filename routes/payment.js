@@ -21,8 +21,9 @@ const SHIPMENT = {
 
 function shipmentPrice(shipmentOption) {
   let estimated = moment().add(shipmentOption.days, "d").format("dddd MMMM Do");
+  let placedDate = moment().format("dddd MMMM Do");
 
-  return { estimated, price: shipmentOption.price };
+  return { estimated, price: shipmentOption.price, placedDate };
 }
 
 router.post("/shipment", (req, res) => {
@@ -77,6 +78,8 @@ router.post("/payment", verifyToken, (req, res) => {
 
       order.owner = req.decoded._id;
       order.estimatedDelivery = req.body.estimatedDelivery;
+      order.placedDate = req.body.placedDate;
+      order.totalPrice = totalPrice / 100;
       await order.save();
     })
     .catch((err) => {

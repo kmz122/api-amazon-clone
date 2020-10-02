@@ -72,7 +72,7 @@ router.put("/auth/user", verifyToken, async (req, res) => {
       await foundUser.save();
 
       res.json({
-        sucess: true,
+        success: true,
         message: "Sucessfully updated the profile.",
       });
     }

@@ -11,6 +11,8 @@ const OrderSchema = new Schema({
     },
   ],
   estimatedDelivery: String,
+  placedDate: String,
+  totalPrice: String,
 });
 
 module.exports = mongoose.model("Order", OrderSchema);
