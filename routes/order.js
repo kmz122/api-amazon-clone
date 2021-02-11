@@ -2,8 +2,8 @@ const rounter = require("express").Router();
 const router = require("express").Router();
 const Order = require("../models/order");
 const verifyToken = require("../middlewares/verify-token");
-// const { find } = require("../models/order");
 
+// GET 'orders'
 router.get("/orders", verifyToken, async (req, res) => {
   try {
     let products = await Order.find({ owner: req.decoded._id })

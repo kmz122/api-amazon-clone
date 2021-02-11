@@ -32,7 +32,7 @@ UserSchema.pre("save", function (next) {
 });
 
 UserSchema.methods.comparedPassword = function (password, next) {
-  let user = this; // have to try to be written in optimal sol 3, from my notes
+  let user = this; 
   return bcrypt.compareSync(password, user.password);
 };
 

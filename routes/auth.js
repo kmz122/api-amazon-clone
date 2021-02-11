@@ -38,7 +38,6 @@ router.post("/auth/signup", async (req, res) => {
 });
 
 // Profile route
-
 router.get("/auth/user", verifyToken, async (req, res) => {
   try {
     let foundUser = await User.findOne({ _id: req.decoded._id }).populate(
@@ -119,5 +118,4 @@ router.post("/auth/login", async (req, res) => {
   }
 });
 
-// Export our router
 module.exports = router;

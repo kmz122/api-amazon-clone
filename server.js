@@ -4,10 +4,11 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
-// import Vue from "vue";
-// const Vue = require("vue");
 
-//Before heroku
+
+// Before deployment to heroku
+// Use "helmet" to protect the well known vulnerabilities 
+// And use "gzip/deflate compression" for responses
 const compression = require("compression");
 const helmet = require("helmet");
 
@@ -18,8 +19,8 @@ const app = express();
 
 dotenv.config();
 
+// Conection Config to MongoDB Atlas
 const dbConnectionString = process.env.DATABASE;
-
 mongoose.connect(
   dbConnectionString,
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true },
@@ -29,7 +30,7 @@ mongoose.connect(
   }
 );
 
-// console.log("typeof process.env.DATABASE: ", dbConnectionString);
+
 
 //Middleware
 app.use(cors());
@@ -37,11 +38,6 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// if (process.env.NODE_ENV === "production") {
-//   // app.use(express.static("./admin/static"));
-//   app.use(express.static("./client/static"));
-//   // app.use(express.static("./admin/pages"));
-// }
 
 app.use(compression());
 app.use(helmet());
@@ -68,12 +64,7 @@ app.use("/api", paymentRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", searchRoutes);
 
-// // go to api home address
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname + "public/index.html"));
-// });
 
-//listening
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (err) => {
   if (err) console.log(err);

@@ -12,10 +12,7 @@ router.post("/products", upload.single("photo"), async (req, res) => {
     product.category = req.body.categoryID;
     product.title = req.body.title;
     product.description = req.body.description;
-    // product.photo = req.body.photo;
-    // product.photo = req.file.location;
     product.photo = req.file.path;
-    // console.log("req.file", req.file);
     product.price = req.body.price;
     product.stockQuantity = req.body.stockQuantity;
 
@@ -122,5 +119,4 @@ router.delete("/products/:id", async (req, res) => {
   }
 });
 
-// Export our router
 module.exports = router;

@@ -86,10 +86,6 @@ router.post("/payment", verifyToken, (req, res) => {
       // Deal with an error
       console.log(err);
       console.log("Success: false");
-      // res.json({
-      //   success: false,
-      //   message: err.message,
-      // });
     });
 
   res.json({
@@ -98,50 +94,4 @@ router.post("/payment", verifyToken, (req, res) => {
   });
 });
 
-//   stripe.customers
-//     .create({
-//       email: req.body.email,
-//     })
-//     .then((customer) => {
-//       return stripe.invoiceItems.create({
-//         customer: customer.id,
-//         amount: totalPrice,
-//         currency: "usd",
-//         description: "One-time setup fee",
-//       });
-//     })
-//     .then((invoiceItem) => {
-//       return stripe.invoices.create({
-//         collection_method: "send_invoice",
-//         customer: invoiceItem.customer,
-//       });
-//     })
-//     .then(async (invoice) => {
-//       // New invoice created on a new customer
-//       let order = new Order();
-//       let cart = req.body.cart;
-
-//       cart.map((product) => {
-//         // map the product from cart to use
-//         order.products.push({
-//           productID: product._id,
-//           quantity: parseInt(product.quantity),
-//           price: product.price,
-//         });
-//       });
-
-//       order.owner = req.decoded._id;
-//       order.estimatedDelivery = req.body.estimatedDelivery;
-//       await order.save();
-//     })
-//     .catch((err) => {
-//       // Deal with an error
-//       res.status(500).json({
-//         sucess: false,
-//         message: err.message,
-//       });
-//     });
-// });
-
-// export the router
 module.exports = router;

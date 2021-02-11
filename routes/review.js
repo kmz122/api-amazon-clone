@@ -22,9 +22,6 @@ router.post(
         { _id: req.params.productID },
         { $push: { reviews: review._id } }
       );
-      console.log("review._id");
-      console.log(review._id);
-      // await Product.update({ $push: { rating: review._id } });
 
       const savedReview = await review.save();
 
