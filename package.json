@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "algoliasearch": "^4.5.1",
-    "axios": "^0.20.0",
+    "axios": "^0.26.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.22.0",
@@ -34,6 +34,6 @@
     "multer-storage-cloudinary": "^4.0.0",
     "path": "^0.12.7",
     "stripe": "^8.97.0",
-    "vue": "^2.6.12"
+    "vue": "^2.6.14"
   }
 }
